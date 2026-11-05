@@ -60,7 +60,7 @@ export default function HeroSection() {
       </div>
       <div className='relative z-10 w-full max-w-[95%] sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto h-full flex flex-col items-center justify-center text-center px-3 sm:px-4'>
         <div className='flex flex-col items-center gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-10'>
-          <img src='/assets/home/locus_2027_small_logo_2.png' alt='LOCUS 2026 Logo' className='h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto float-animation drop-shadow-[0_0_28px_rgba(217,70,239,0.38)]' />
+          <img src='/assets/home/locus_2027_small_logo_2.png' alt='LOCUS 2026 Logo' className='h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto float-animation ' />
           <div className='space-y-2 sm:space-y-3 md:space-y-4'>
             <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight slide-in leading-tight'><span className='text-white'>LOCUS </span><span className='text-fuchsia-300'>2027</span></h1>
             <div className='space-y-2 sm:space-y-3'>

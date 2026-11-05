@@ -2,7 +2,7 @@ import WireframeSphere from "./wireframe"
 const LocusDirectors = () => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-2 gap-4">
              
              
              
@@ -13,7 +13,7 @@ const LocusDirectors = () => {
             <WireframeSphere />
          {/* </div>  */}
          <div className="my-auto max-w-[50svw] space-y-4">
-           <h2 className="text-xl sm:text-6xl lg:text-7xl tracking-tight ">
+           <h2 className="text-3xl sm:text-6xl lg:text-7xl tracking-tight ">
              <span className="text-primary">LOCUS </span>
              <span className="text-white">2027 </span>
              <span className="text-primary">Marvels </span>

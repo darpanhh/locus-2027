@@ -35,6 +35,7 @@ function App() {
     <RouterProvider router={router}>
       <AnalyticsTracker>
         {/* Your app's main content will go here */}
+        
         <div>App Content</div>
       </AnalyticsTracker>
     </RouterProvider>
