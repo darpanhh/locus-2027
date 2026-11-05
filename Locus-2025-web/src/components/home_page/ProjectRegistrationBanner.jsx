@@ -36,7 +36,7 @@ export default function ProjectRegistrationBanner() {
 
           <div className='flex flex-col sm:flex-row items-center gap-4 pr-6'>
             <div className='flex-shrink-0'>
-              <div className='bg-gradient-to-br from-fuchsia-400 to-purple-700 p-3 rounded-lg'>
+              <div className='bg-gradient-to-br from-[#FF79B7] to-[#FF4FA3] p-3 rounded-lg'>
                 <Trophy className='w-7 h-7 text-black' />
               </div>
             </div>
@@ -58,7 +58,7 @@ export default function ProjectRegistrationBanner() {
               </button>
               <button
                 onClick={handleRegisterClick}
-                className='inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-all'
+                className='inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-[#FF4FA3] text-white hover:bg-[#E73589] transition-all'
               >
                 Register
                 <ExternalLink className='w-3.5 h-3.5' />

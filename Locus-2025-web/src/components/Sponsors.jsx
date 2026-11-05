@@ -1,8 +1,8 @@
+
 import React from "react";
 import sponsor_data from '../data/sponsor_data.json'
 
 const Sponsors = () => {
-
 
   // Group sponsors by sponsor_title
   const groupedSponsors = sponsor_data.reduce((groups, sponsor) => {
@@ -15,10 +15,10 @@ const Sponsors = () => {
   }, {});
 
   return (
-    <div className="text-center bg-black text-white py-10 px-6">
+    <div className="text-center bg-[#0C0812] text-white py-10 px-6">
       <div>
         <h1 className="text-3xl md:text-5xl font-bold mb-6">
-          Locus <span className="text-[#d946ef]">2026</span> Sponsors
+          Locus <span className="text-[#FF4FA3]">2026</span> Sponsors
         </h1>
       </div>
 
@@ -27,8 +27,8 @@ const Sponsors = () => {
         <div key={index} className="mb-12">
           {/* sponsor_title Heading with Horizontal Bar */}
           <div className="relative flex items-center justify-center mb-6">
-            <hr className="absolute w-full border-t-2 border-gray-600" />
-            <h2 className="relative bg-black px-4 text-2xl md:text-3xl font-semibold text-[#d946ef]">
+            <hr className="absolute w-full border-t-2 border-[#FF4FA3]/30" />
+            <h2 className="relative bg-[#0C0812] px-4 text-2xl md:text-3xl font-semibold text-[#FF4FA3]">
               {sponsor_title}
             </h2>
           </div>
@@ -38,7 +38,7 @@ const Sponsors = () => {
             {groupedSponsors[sponsor_title].map((sponsor, idx) => (
               <div
                 key={idx}
-                className="bg-gray-800 rounded-lg p-6 w-full shadow-lg hover:shadow-2xl transition-transform hover:scale-105 duration-300 flex flex-col sm:flex-row items-center"
+                className="bg-[#20101B] rounded-lg p-6 w-full shadow-lg hover:shadow-2xl transition-transform hover:scale-105 duration-300 flex flex-col sm:flex-row items-center"
               >
                 <a
                   href={sponsor.sponsorlink}
@@ -53,7 +53,7 @@ const Sponsors = () => {
                   />
                 </a>
                 <div className="text-center sm:text-left">
-                  <h3 className="text-xl font-bold text-[#d946ef] mb-2">
+                  <h3 className="text-xl font-bold text-[#FF4FA3] mb-2">
                     {sponsor.sponsor_name}
                   </h3>
                   {sponsor.subtitle && (
@@ -63,7 +63,7 @@ const Sponsors = () => {
                     href={sponsor.sponsorlink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-3 text-sm text-[#f0abfc] hover:underline"
+                    className="inline-block mt-3 text-sm text-[#FF79B7] hover:underline"
                   >
                     {sponsor.sponsor_text}
                   </a>

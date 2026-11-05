@@ -14,7 +14,7 @@ export default function Events() {
 
         <Link
           to="/events"
-          className="inline-block px-6 py-2 text-white bg-fuchsia-600 rounded transition-colors duration-300 hover:bg-fuchsia-500"
+          className="inline-block px-6 py-2 text-white bg-[#FF4FA3] rounded transition-colors duration-300 hover:bg-[#E73589]"
         >
           Show More 
         </Link>

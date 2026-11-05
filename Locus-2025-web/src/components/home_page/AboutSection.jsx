@@ -19,7 +19,7 @@ export default function AboutSection() {
           <div className="space-y-4 sm:space-y-6 text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               <span className="text-white">About </span>
-              <span className="text-pink-400">LOCUS</span>
+              <span className="text-[#FF4FA3]">LOCUS</span>
             </h2>
             
             <p className="text-white text-base sm:text-md lg:text-lg leading-relaxed max-w-4xl mx-auto">

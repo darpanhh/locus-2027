@@ -1,34 +1,52 @@
+/* LOCUS 2027 — Primary Pink
+   Replace Locus-2025-web/src/index.css with this file.
+   The compatibility classes at the bottom preserve the existing JSX styles. */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html { background: #0b0a10; scroll-behavior: smooth; }
+/* Main brand: vivid PRIMARY PINK (#FF4FA3); pale pink is supporting only. */
+:root {
+  --locus-ink: #0c0812;
+  --locus-surface: #21111f;
+  --locus-pink: #ff4fa3;
+  --locus-pink-soft: #ffacd1;
+  --locus-text: #fff4f9;
+  --locus-border: rgba(255, 172, 209, 0.22);
+}
+
+html {
+  background: var(--locus-ink);
+  scroll-behavior: smooth;
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  color: #f8f7ff;
+  color: var(--locus-text);
   font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  /* Keep the atmosphere in the background: a quiet ink base with two soft pools of colour. */
   background:
-    radial-gradient(ellipse 42% 34% at 8% 0%, rgba(91, 65, 139, 0.16), transparent 72%),
-    radial-gradient(ellipse 34% 28% at 96% 22%, rgba(139, 58, 120, 0.09), transparent 74%),
-    #0b0a10;
+    radial-gradient(ellipse 45% 32% at 8% 3%, rgba(255, 79, 163, 0.19), transparent 75%),
+    radial-gradient(ellipse 36% 32% at 96% 23%, rgba(255, 172, 209, 0.08), transparent 76%),
+    var(--locus-ink);
 }
 
+/* Very subtle grid: atmospheric, not distracting. */
 body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   content: "";
-  opacity: 0.18;
+  opacity: 0.16;
   background-image:
-    linear-gradient(rgba(235, 225, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(235, 225, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(255, 172, 209, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 172, 209, 0.055) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, black, transparent 58%);
 }
@@ -38,92 +56,82 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @layer base {
-  :root {
-    --background: 242 42% 5%;
-    --foreground: 250 40% 98%;
-    --card: 247 36% 9%;
-    --card-foreground: 250 40% 98%;
-    --popover: 247 36% 9%;
-    --popover-foreground: 250 40% 98%;
-    --primary: 292 95% 73%;
-    --primary-foreground: 245 40% 8%;
-    --secondary: 250 28% 15%;
-    --secondary-foreground: 250 40% 98%;
-    --muted: 250 22% 16%;
-    --muted-foreground: 250 14% 68%;
-    --accent: 292 95% 73%;
-    --accent-foreground: 245 40% 8%;
+  :root, .dark {
+    --background: 276 38% 5%;
+    --foreground: 333 100% 98%;
+    --card: 323 32% 10%;
+    --card-foreground: 333 100% 98%;
+    --popover: 323 32% 10%;
+    --popover-foreground: 333 100% 98%;
+    --primary: 331 100% 65.5%;
+    --primary-foreground: 330 48% 8%;
+    --secondary: 325 34% 17%;
+    --secondary-foreground: 335 100% 95%;
+    --muted: 323 24% 16%;
+    --muted-foreground: 327 17% 73%;
+    --accent: 331 100% 65.5%;
+    --accent-foreground: 330 48% 8%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 250 25% 23%;
-    --input: 250 22% 20%;
-    --ring: 292 95% 73%;
+    --border: 326 29% 25%;
+    --input: 326 24% 20%;
+    --ring: 331 100% 65.5%;
     --radius: 0.9rem;
   }
-  .dark {
-    --background: 242 42% 5%;
-    --foreground: 250 40% 98%;
-    --card: 247 36% 9%;
-    --card-foreground: 250 40% 98%;
-    --popover: 247 36% 9%;
-    --popover-foreground: 250 40% 98%;
-    --primary: 292 95% 73%;
-    --primary-foreground: 245 40% 8%;
-    --secondary: 250 28% 15%;
-    --secondary-foreground: 250 40% 98%;
-    --muted: 250 22% 16%;
-    --muted-foreground: 250 14% 68%;
-    --accent: 292 95% 73%;
-    --accent-foreground: 245 40% 8%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 250 25% 23%;
-    --input: 250 22% 20%;
-    --ring: 292 95% 73%;
-  }
+
   textarea::-webkit-scrollbar { display: none; }
 }
 
-::selection { color: #0a0920; background: #f0abfc; }
-:focus-visible { outline: 2px solid #f0abfc; outline-offset: 3px; }
+::selection {
+  color: #1c0815;
+  background: #ffacd1;
+}
 
-/* LOCUS 2027 palette aliases for the existing component utilities. */
-.text-\[\#e879f9\] { color: #f0abfc; }
-.bg-\[\#e879f9\] { background-color: #e879f9; }
-.border-\[\#e879f9\] { border-color: #e879f9; }
-.hover\:text-\[\#e879f9\]:hover { color: #f5d0fe; }
-.hover\:bg-\[\#e879f9\]:hover { background-color: #f0abfc; }
-.hover\:border-\[\#e879f9\]:hover { border-color: #f0abfc; }
-.bg-\[\#e879f9\]\/5 { background-color: rgb(232 121 249 / 0.05); }
-.bg-\[\#e879f9\]\/10 { background-color: rgb(232 121 249 / 0.1); }
-.bg-\[\#e879f9\]\/20 { background-color: rgb(232 121 249 / 0.2); }
-.border-\[\#e879f9\]\/30 { border-color: rgb(232 121 249 / 0.3); }
-.border-\[\#e879f9\]\/40 { border-color: rgb(232 121 249 / 0.4); }
-.border-\[\#e879f9\]\/50 { border-color: rgb(232 121 249 / 0.5); }
-.border-\[\#e879f9\]\/60 { border-color: rgb(232 121 249 / 0.6); }
-.hover\:bg-\[\#e879f9\]\/5:hover { background-color: rgb(232 121 249 / 0.05); }
-.hover\:bg-\[\#e879f9\]\/10:hover { background-color: rgb(232 121 249 / 0.1); }
-.hover\:bg-\[\#e879f9\]\/20:hover { background-color: rgb(232 121 249 / 0.2); }
-.hover\:border-\[\#e879f9\]\/40:hover { border-color: rgb(232 121 249 / 0.4); }
-.text-\[\#d946ef\] { color: #ef83ff; }
-.bg-\[\#d946ef\] { background-color: #c95ae7; }
-.border-\[\#d946ef\] { border-color: #c95ae7; }
-.hover\:text-\[\#d946ef\]:hover { color: #f7c2ff; }
-.hover\:bg-\[\#d946ef\]:hover { background-color: #db71ef; }
-.hover\:border-\[\#d946ef\]:hover { border-color: #ef83ff; }
-.bg-\[\#d946ef\]\/10 { background-color: rgb(201 90 231 / 0.1); }
-.bg-\[\#d946ef\]\/20 { background-color: rgb(201 90 231 / 0.2); }
-.border-\[\#d946ef\]\/30 { border-color: rgb(201 90 231 / 0.3); }
-.border-\[\#d946ef\]\/40 { border-color: rgb(201 90 231 / 0.4); }
-.border-\[\#d946ef\]\/50 { border-color: rgb(201 90 231 / 0.5); }
-.hover\:bg-\[\#d946ef\]\/10:hover { background-color: rgb(201 90 231 / 0.1); }
-.hover\:bg-\[\#d946ef\]\/20:hover { background-color: rgb(201 90 231 / 0.2); }
-.hover\:border-\[\#d946ef\]\/40:hover { border-color: rgb(201 90 231 / 0.4); }
-.bg-\[\#c026d3\] { background-color: #9d55e8; }
-.hover\:bg-\[\#c026d3\]:hover { background-color: #b86df2; }
+:focus-visible {
+  outline: 2px solid var(--locus-pink-soft);
+  outline-offset: 3px;
+}
+
+/* Compatibility aliases: existing JSX may contain the OLD hex class names.
+   We keep those selectors but render the NEW pink palette. */
+
+   .text-\[\#e879f9\] { color: var(--locus-pink); }
+.bg-\[\#e879f9\] { background-color: #ff4fa3; }
+.border-\[\#e879f9\] { border-color: #ff4fa3; }
+.hover\:text-\[\#e879f9\]:hover { color: #ffd2e6; }
+.hover\:bg-\[\#e879f9\]:hover { background-color: #ff78ba; }
+.hover\:border-\[\#e879f9\]:hover { border-color: #ff78ba; }
+.bg-\[\#e879f9\]\/5 { background-color: rgb(255 79 163 / 0.05); }
+.bg-\[\#e879f9\]\/10 { background-color: rgb(255 79 163 / 0.10); }
+.bg-\[\#e879f9\]\/20 { background-color: rgb(255 79 163 / 0.20); }
+.border-\[\#e879f9\]\/30 { border-color: rgb(255 79 163 / 0.30); }
+.border-\[\#e879f9\]\/40 { border-color: rgb(255 79 163 / 0.40); }
+.border-\[\#e879f9\]\/50 { border-color: rgb(255 79 163 / 0.50); }
+.border-\[\#e879f9\]\/60 { border-color: rgb(255 79 163 / 0.60); }
+.hover\:bg-\[\#e879f9\]\/5:hover { background-color: rgb(255 79 163 / 0.05); }
+.hover\:bg-\[\#e879f9\]\/10:hover { background-color: rgb(255 79 163 / 0.10); }
+.hover\:bg-\[\#e879f9\]\/20:hover { background-color: rgb(255 79 163 / 0.20); }
+.hover\:border-\[\#e879f9\]\/40:hover { border-color: rgb(255 79 163 / 0.40); }
+
+.text-\[\#d946ef\] { color: #ff78ba; }
+.bg-\[\#d946ef\] { background-color: #e9368e; }
+.border-\[\#d946ef\] { border-color: #e9368e; }
+.hover\:text-\[\#d946ef\]:hover { color: #ffacd1; }
+.hover\:bg-\[\#d946ef\]:hover { background-color: #ff4fa3; }
+.hover\:border-\[\#d946ef\]:hover { border-color: #ff78ba; }
+.bg-\[\#d946ef\]\/10 { background-color: rgb(233 54 142 / 0.10); }
+.bg-\[\#d946ef\]\/20 { background-color: rgb(233 54 142 / 0.20); }
+.border-\[\#d946ef\]\/30 { border-color: rgb(233 54 142 / 0.30); }
+.border-\[\#d946ef\]\/40 { border-color: rgb(233 54 142 / 0.40); }
+.border-\[\#d946ef\]\/50 { border-color: rgb(233 54 142 / 0.50); }
+.hover\:bg-\[\#d946ef\]\/10:hover { background-color: rgb(233 54 142 / 0.10); }
+.hover\:bg-\[\#d946ef\]\/20:hover { background-color: rgb(233 54 142 / 0.20); }
+.hover\:border-\[\#d946ef\]\/40:hover { border-color: rgb(233 54 142 / 0.40); }
+.bg-\[\#c026d3\] { background-color: #bf216c; }
+.hover\:bg-\[\#c026d3\]:hover { background-color: #e9368e; }
+
 textarea { overflow: hidden; }
 
-/* UI polish: visual-only enhancements shared by the existing pages. */
 a, button, input, textarea, select {
   -webkit-tap-highlight-color: transparent;
 }
@@ -132,15 +140,17 @@ button {
   font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
 }
 
-.text-fuchsia-300 { color: #f0a5ff; }
-.text-fuchsia-200 { color: #f7cdfd; }
+/* Preserve known existing utility overrides while making them pink. */
+.text-fuchsia-300 { color: var(--locus-pink); }
+.text-fuchsia-200 { color: #ffd2e6; }
 
+/* Navbar: rose-tinted glass instead of lavender glass. */
 header.fixed > div:first-child {
-  border-color: rgba(205, 149, 255, 0.3);
-  background: linear-gradient(105deg, rgba(11, 9, 27, 0.92), rgba(24, 14, 45, 0.82));
+  border-color: rgba(255, 79, 163, 0.30);
+  background: linear-gradient(105deg, rgba(20, 9, 23, 0.94), rgba(43, 15, 37, 0.86));
   box-shadow:
-    0 14px 40px rgba(3, 1, 18, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    0 14px 40px rgba(10, 3, 12, 0.38),
+    inset 0 1px 0 rgba(255, 210, 230, 0.07);
 }
 
 header.fixed nav a,
@@ -150,22 +160,25 @@ header.fixed nav button {
 
 header.fixed nav a:hover,
 header.fixed nav button:hover {
-  text-shadow: 0 0 18px rgba(216, 126, 255, 0.55);
+  text-shadow: 0 0 16px rgba(255, 79, 163, 0.34);
 }
 
+/* Existing cards: dark rose with subtle outlines, not purple. */
 main .relative.w-full.mx-auto.bg-white.rounded-lg {
-  border: 1px solid rgba(232, 121, 249, 0.24);
-  background: linear-gradient(155deg, rgba(24, 22, 51, 0.96), rgba(12, 10, 29, 0.97));
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 172, 209, 0.19);
+  background: linear-gradient(155deg, rgba(39, 16, 34, 0.96), rgba(18, 10, 20, 0.97));
+  box-shadow: 0 16px 36px rgba(6, 2, 8, 0.28);
 }
 
 main .relative.w-full.mx-auto.bg-white.rounded-lg:hover {
-  border-color: rgba(157, 104, 246, 0.7);
-  box-shadow: 0 22px 48px rgba(43, 15, 85, 0.36), 0 0 0 1px rgba(232, 121, 249, 0.06);
+  border-color: rgba(255, 79, 163, 0.55);
+  box-shadow:
+    0 20px 46px rgba(55, 12, 42, 0.30),
+    0 0 0 1px rgba(255, 79, 163, 0.05);
 }
 
 footer {
-  box-shadow: 0 -18px 60px rgba(7, 4, 26, 0.32);
+  box-shadow: 0 -18px 60px rgba(17, 4, 16, 0.32);
 }
 
 footer h3 {
@@ -178,10 +191,14 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: rgba(232, 121, 249, 0.7);
-  box-shadow: 0 0 0 4px rgba(232, 121, 249, 0.1);
+  border-color: rgba(255, 79, 163, 0.72);
+  box-shadow: 0 0 0 4px rgba(255, 79, 163, 0.11);
 }
 
 @media (max-width: 640px) {
   body::before { background-size: 48px 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
