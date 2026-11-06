@@ -47,9 +47,9 @@ export default function HeroSection() {
   }, []);
 
   const eventDates = [
-    { day: "16", nepaliMonth: "MAGH", englishDate: "Jan 30, 2026" },
-    { day: "17", nepaliMonth: "MAGH", englishDate: "Jan 31, 2026" },
-    { day: "18", nepaliMonth: "MAGH", englishDate: "Feb 1, 2026" },
+    { day: "16", nepaliMonth: "MAGH", englishDate: "Jan 30, 2027" },
+    { day: "17", nepaliMonth: "MAGH", englishDate: "Jan 31, 2027" },
+    { day: "18", nepaliMonth: "MAGH", englishDate: "Feb 1, 2027" },
   ];
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface Colors {
   background: string;
@@ -27,11 +27,11 @@ interface ParticleAnimationProps {
 }
 
 const defaultColors: Colors = {
-  background: '#08050c',
-  link: '#a21caf',
-  text: '#e879f9',
-  particle: '#c026d3',
-  particleStroke: '#a21caf'
+  background: '#08070d',
+  link: '#f472b6',
+  text: '#fbcfe8',
+  particle: '#f472b6',
+  particleStroke: '#f472b6'
 };
 
 class Particle {
@@ -107,14 +107,14 @@ class Particle {
 }
 
 const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
-  opacity = 48,
+  opacity = 60,
   numParticles = 5,
   sizeMultiplier = 5,
   speed = 15,
   avoidMouse = false,
-  width = 1,
+  width = 1.3,
   connections = true,
-  connectionDensity = 10,
+  connectionDensity = 7,
   noBounceH = false,
   noBounceV = false,
   speedH = 1,
@@ -126,9 +126,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const particlesArrayRef = useRef<Particle[]>([]);
-  const [mousePosition, setMousePosition] = useState({
-    x: undefined as number | undefined,
-    y: undefined as number | undefined,
+  // Use refs instead of state to avoid re-renders on every mouse move
+  const mousePositionRef = useRef<{ x: number | undefined; y: number | undefined; radius: number }>({
+    x: undefined,
+    y: undefined,
     radius: 0
   });
 
@@ -141,35 +142,30 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
     const canvasContext = canvas.getContext('2d');
     if (!canvasContext) return;
 
+    // Reduce particle count on mobile for better performance
+    const isMobile = window.innerWidth < 768;
+    const effectiveNumParticles = isMobile ? Math.max(2, Math.floor(numParticles * 0.5)) : numParticles;
+
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      setMousePosition(prev => ({
-        ...prev,
-        radius: (canvas.height / 80) * (canvas.width / 80)
-      }));
+      mousePositionRef.current.radius = (canvas.height / 80) * (canvas.width / 80);
       initParticles(canvas, canvasContext);
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition(prev => ({
-        ...prev,
-        x: event.x,
-        y: event.y
-      }));
+      mousePositionRef.current.x = event.x;
+      mousePositionRef.current.y = event.y;
     };
 
     const handleMouseOut = () => {
-      setMousePosition(prev => ({
-        ...prev,
-        x: undefined,
-        y: undefined
-      }));
+      mousePositionRef.current.x = undefined;
+      mousePositionRef.current.y = undefined;
     };
 
     const initParticles = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => {
       particlesArrayRef.current = [];
-      const numberOfParticles = (canvas.width * 0.01) * numParticles;
+      const numberOfParticles = (canvas.width * 0.01) * effectiveNumParticles;
 
       for (let i = 0; i < numberOfParticles; i++) {
         const size = (Math.random() * sizeMultiplier) + 1;
@@ -187,24 +183,26 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
 
     const connectParticles = (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
       const particles = particlesArrayRef.current;
-      const connectionDistance = Math.min(canvas.width, canvas.height) / connectionDensity;
+      const connectionDistance = Math.max(130, Math.min(canvas.width, canvas.height) / connectionDensity);
       const connectionDistanceSquared = connectionDistance * connectionDistance;
+      const mousePos = mousePositionRef.current;
+
       for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
+        for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const distance = dx * dx + dy * dy;
 
           if (distance < connectionDistanceSquared) {
-            let opacityValue = 0.12 + (1 - (distance / connectionDistanceSquared)) * 0.68;
+            let opacityValue = 0.12 + (1 - (distance / connectionDistanceSquared)) * 0.38;
             
-            if (hover && mousePosition.x !== undefined && mousePosition.y !== undefined) {
-              const mouseDx = mousePosition.x - particles[a].x; 
-              const mouseDy = mousePosition.y - particles[a].y;
-              const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+            if (hover && mousePos.x !== undefined && mousePos.y !== undefined) {
+              const mouseDx = mousePos.x - particles[a].x; 
+              const mouseDy = mousePos.y - particles[a].y;
+              const mouseDistance = mouseDx * mouseDx + mouseDy * mouseDy;
               
-              if (mouseDistance < 200) {
-                opacityValue = Math.min(opacityValue * 2, 1);
+              if (mouseDistance < 40000) { // 200^2 = 40000, avoid sqrt
+                opacityValue = Math.min(opacityValue * 1.4, 0.65);
               }
             }
 
@@ -226,9 +224,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
       canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 
       const normalizedSpeed = (speed !== 0) ? (speed / 100) : 0;
+      const mousePos = mousePositionRef.current;
       canvasContext.globalAlpha = 1;
       particlesArrayRef.current.forEach(particle => {
-        particle.update(mousePosition, avoidMouse, noBounceH, noBounceV, speedH, speedV, normalizedSpeed);
+        particle.update(mousePos, avoidMouse, noBounceH, noBounceV, speedH, speedV, normalizedSpeed);
         particle.draw(particleColor);
       });
 
@@ -243,7 +242,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
     canvas.style.opacity = (opacity / 100).toString();
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseout', handleMouseOut);
 
     animate();
@@ -270,9 +269,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
         width: '100%',
         zIndex: 0,
         pointerEvents: 'none',
+        willChange: 'transform',
       }}
     />
   );
 };
 
-export default ParticleAnimation;
+export default React.memo(ParticleAnimation);

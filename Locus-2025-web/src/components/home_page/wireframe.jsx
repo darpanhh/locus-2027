@@ -23,9 +23,10 @@ const WireframeSphere = () => { const containerRef = useRef(null);
 
     // Shader Material: Render points as circles with shaders
     const shaderMaterial = new THREE.ShaderMaterial({
+      transparent: true,
       uniforms: {
         pointSize: { value: 10.0 },
-        color: { value: new THREE.Color(0xd946ef) },
+        color: { value: new THREE.Color(0xf472b6) }, // Vibrant, pronounced pink
       },
       vertexShader: `
         uniform float pointSize;
@@ -44,7 +45,7 @@ const WireframeSphere = () => { const containerRef = useRef(null);
       `,
     });
 
-    const scalingvector = new THREE.Vector3(2.0, 2.0,2.0);
+    const scalingvector = new THREE.Vector3(2.0, 2.0, 2.0);
     // Geometry: Sparse Wireframe Sphere
     const geometry = new THREE.IcosahedronGeometry(3, 1);
     const points = new THREE.Points(geometry, shaderMaterial);
@@ -52,11 +53,9 @@ const WireframeSphere = () => { const containerRef = useRef(null);
     scene.add(points);
 
     const wireframe = new THREE.WireframeGeometry(geometry);
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xd946ef });
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xec4899, transparent: true, opacity: 0.75 });
     const edges = new THREE.LineSegments(wireframe, lineMaterial);
 
-
-    
     edges.scale.copy(scalingvector);
 
     scene.add(edges);
@@ -68,8 +67,6 @@ const WireframeSphere = () => { const containerRef = useRef(null);
     controls.dampingFactor = 0.05;
     controls.minDistance = 10; 
     controls.maxDistance = 20;
-
-
 
     // Handle Resize
     const handleResize = () => {

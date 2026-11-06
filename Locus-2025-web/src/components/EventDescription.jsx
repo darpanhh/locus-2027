@@ -2,33 +2,9 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { eventsData, mainEventsData } from "../data/eventDetails";
+import { getImageUrl } from "../utils/imageUrl";
+
 const EventDescription = () => {
-  // Helper function to convert Google Drive links to direct image URLs
-  const getImageUrl = (url) => {
-    if (!url) return url;
-    
-    // Extract file ID from various Google Drive URL formats
-    let fileId = null;
-    
-    // Format 1: /d/{FILE_ID}
-    const driveMatch1 = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch1) {
-      fileId = driveMatch1[1];
-    }
-    
-    // Format 2: id={FILE_ID} or ?id={FILE_ID}
-    const driveMatch2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (driveMatch2) {
-      fileId = driveMatch2[1];
-    }
-    
-    // If we found a Google Drive file ID, use the thumbnail endpoint
-    if (fileId) {
-      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
-    }
-    
-    return url;
-  };
 
   const { title } = useParams();
   console.log(title);
@@ -65,6 +41,8 @@ const EventDescription = () => {
               {event.imgSrc && (
                 <img
                   src={getImageUrl(event.imgSrc)}
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
                   className="w-full max-w-sm rounded-xl border-2 border-gray-700/50 shadow-lg"
                   alt={event.title}
                 />
@@ -241,6 +219,8 @@ const EventDescription = () => {
                 <div key={img.name} className="p-4 bg-gray-900/50 border-2 border-gray-700/50 rounded-lg hover:border-[#e879f9]/50 transition-all duration-300">
                   <img
                     src={getImageUrl(img.image)}
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
                     className="w-32 sm:w-48 h-auto object-contain"
                     alt={`${img.name} Sponsor`}
                   />

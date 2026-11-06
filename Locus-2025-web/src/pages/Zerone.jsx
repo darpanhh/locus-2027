@@ -133,11 +133,9 @@ function Zerone() {
                   >
                     Closed
                   </span>
-                  <Link to='https://medium.com/zerone-magazine/tagged/blogging-competition'>
-                    <button className='text-white px-4 py-1 rounded-lg text-sm hover:bg-fuchsia-600 transition-colors'>
-                      More
-                    </button>
-                  </Link>
+                  <span className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/70 hover:bg-[#d946ef] border border-white/30 hover:border-[#d946ef] backdrop-blur-md shadow-lg transition-all duration-200'>
+                    More →
+                  </span>
                 </div>
               </Link>
               <Link
@@ -166,11 +164,9 @@ function Zerone() {
                   >
                     Closed
                   </span>
-                  <Link to='https://medium.com/zerone-magazine/tagged/technical-competition'>
-                    <button className='text-white px-4 py-1 rounded-lg text-sm hover:bg-fuchsia-600 transition-colors'>
-                      More
-                    </button>
-                  </Link>
+                  <span className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/70 hover:bg-[#d946ef] border border-white/30 hover:border-[#d946ef] backdrop-blur-md shadow-lg transition-all duration-200'>
+                    More →
+                  </span>
                 </div>
               </Link>
             </div>
