@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
 
-const styles = `
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-  @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .float-animation { animation: float 3s ease-in-out infinite; }
-  .slide-in { animation: slideInUp 0.6s ease-out; }
-`;
+// Animations are now in index.css — no runtime style injection needed
 
 function EventDateCard({ day, nepaliMonth, englishDate, index }) {
   return (
@@ -25,13 +20,6 @@ function EventDateCard({ day, nepaliMonth, englishDate, index }) {
 
 export default function HeroSection() {
   const [daysRemaining, setDaysRemaining] = useState(null);
-
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.textContent = styles;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
 
   useEffect(() => {
     const calculateDaysRemaining = () => {

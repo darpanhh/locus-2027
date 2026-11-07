@@ -24,7 +24,9 @@ export default function LocusHighlights() {
             <img
               src={image.src}
               alt={image.alt}
-              className="absolute w-full h-full"
+              loading="lazy"
+              decoding="async"
+              className="absolute w-full h-full object-cover"
             />
           </div>
         ))}

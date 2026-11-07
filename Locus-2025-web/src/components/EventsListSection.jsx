@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { eventsData } from "../data/eventDetails";
 import { Link } from "react-router-dom";
 
@@ -33,40 +33,42 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
     return url;
   };
 
-  const sortedEvents = [...eventsData].sort((a, b) => {
-    // Helper function to clean and parse dates
-    const parseDate = (dateString) => {
-      // Remove ordinal suffixes (st, nd, rd, th)
-      const cleanedDate = dateString.replace(/(\d+)(st|nd|rd|th)/, "$1");
-      // Parse cleaned date
-      return new Date(cleanedDate);
-    };
+  // Memoize sort + slice so it doesn't recalculate on every render
+  const eventsToDisplay = useMemo(() => {
+    const sorted = [...eventsData].sort((a, b) => {
+      // Helper function to clean and parse dates
+      const parseDate = (dateString) => {
+        // Remove ordinal suffixes (st, nd, rd, th)
+        const cleanedDate = dateString.replace(/(\d+)(st|nd|rd|th)/, "$1");
+        // Parse cleaned date
+        return new Date(cleanedDate);
+      };
 
-    // Push 'Closed' events to the bottom
-    if (a.event_type.status === "Closed" && b.event_type.status !== "Closed") {
-      return 1; // 'a' goes to bottom
-    }
-    if (a.event_type.status !== "Closed" && b.event_type.status === "Closed") {
-      return -1; // 'b' goes to bottom
-    }
+      // Push 'Closed' events to the bottom
+      if (a.event_type.status === "Closed" && b.event_type.status !== "Closed") {
+        return 1; // 'a' goes to bottom
+      }
+      if (a.event_type.status !== "Closed" && b.event_type.status === "Closed") {
+        return -1; // 'b' goes to bottom
+      }
 
-    // Prioritize 'Active' status
-    if (a.event_type.status === "Active" && b.event_type.status !== "Active") {
-      return -1; // 'a' comes first
-    }
-    if (a.event_type.status !== "Active" && b.event_type.status === "Active") {
-      return 1; // 'b' comes first
-    }
+      // Prioritize 'Active' status
+      if (a.event_type.status === "Active" && b.event_type.status !== "Active") {
+        return -1; // 'a' comes first
+      }
+      if (a.event_type.status !== "Active" && b.event_type.status === "Active") {
+        return 1; // 'b' comes first
+      }
 
-    // If status is the same, sort by start_date in descending order
-    const dateA = parseDate(a.date_and_time.start_date);
-    const dateB = parseDate(b.date_and_time.start_date);
+      // If status is the same, sort by start_date in descending order
+      const dateA = parseDate(a.date_and_time.start_date);
+      const dateB = parseDate(b.date_and_time.start_date);
 
-    return dateB - dateA; // Descending order
-  });
+      return dateB - dateA; // Descending order
+    });
 
-  // Slice the array to display only the number of events defined in numEventsToShow
-  const eventsToDisplay = sortedEvents.slice(0, numEventsToShow);
+    return sorted.slice(0, numEventsToShow);
+  }, [numEventsToShow]);
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12'>
@@ -86,6 +88,8 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
                 src={getImageUrl(event.imgSrc)}
                 alt={`Event ${event.title}`}
                 referrerPolicy='no-referrer'
+                loading="lazy"
+                decoding="async"
                 className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
               />
             </div>
