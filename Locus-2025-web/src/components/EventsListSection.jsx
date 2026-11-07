@@ -6,6 +6,7 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
   // Helper function to convert Google Drive links to direct image URLs
   const getImageUrl = (url) => {
     if (!url) return url;
+    if (url.startsWith('/assets/')) return url;
 
     // Extract file ID from various Google Drive URL formats
     let fileId = null;
@@ -17,14 +18,16 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
     }
 
     // Format 2: id={FILE_ID} or ?id={FILE_ID}
-    const driveMatch2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (driveMatch2) {
-      fileId = driveMatch2[1];
+    if (!fileId) {
+      const driveMatch2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch2) {
+        fileId = driveMatch2[1];
+      }
     }
 
-    // If we found a Google Drive file ID, use the thumbnail endpoint
+    // Direct CDN endpoint (works reliably without 429 redirects)
     if (fileId) {
-      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      return `https://lh3.googleusercontent.com/d/${fileId}=w1000`;
     }
 
     return url;
@@ -76,22 +79,26 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
           <CardWrapper
             key={event.id}
             {...cardProps}
-            className={`relative w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg ${isClosed ? 'cursor-not-allowed' : ''}`}
+            className={`group relative w-full mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl ${isClosed ? 'cursor-not-allowed' : ''}`}
           >
-            <div className='aspect-w-5 aspect-h-5 bg-gray-200'>
+            <div className='aspect-w-5 aspect-h-5 bg-gray-900'>
               <img
                 src={getImageUrl(event.imgSrc)}
                 alt={`Event ${event.title}`}
-                className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'
+                referrerPolicy='no-referrer'
+                className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
               />
             </div>
+            {/* Gradient overlay at bottom to ensure badges and buttons are distinct from the photo */}
+            <div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none' />
             {/* Floating Buttons */}
-            <div className='absolute bottom-4 left-4 right-4 flex justify-between items-center z-10'>
+            <div className='absolute bottom-3.5 left-3.5 right-3.5 flex justify-between items-center z-10 gap-2'>
               {event.event_type.status && (
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${
+                  className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border shadow-sm ${
                     event.event_type.status === "Coming Soon" ||
-                    event.event_type.status === "Open"
+                    event.event_type.status === "Open" ||
+                    event.event_type.status === "Upcoming"
                       ? "bg-[#d946ef]/20 text-[#d946ef] border-[#d946ef]/40"
                       : event.event_type.status === "Active" ||
                           event.event_type.status === "Ongoing"
@@ -103,14 +110,12 @@ const EventsListSection = ({ numEventsToShow = eventsData.length }) => {
                 </span>
               )}
               {!isClosed && (
-                <Link
-                  to={`/event/${event.title}`}
-                  className={!event.event_type.status ? "ml-auto" : ""}
+                <span
+                  className='ml-auto inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium text-[#d946ef] hover:text-white bg-[#d946ef]/20 hover:bg-[#d946ef]/35 border border-[#d946ef]/40 hover:border-[#d946ef]/70 backdrop-blur-md shadow-sm transition-all duration-300 cursor-pointer'
                 >
-                  <button className='text-white px-4 py-1 rounded-lg text-sm hover:bg-fuchsia-600 transition-colors'>
-                    More
-                  </button>
-                </Link>
+                  <span>More</span>
+                  <span className='transition-transform duration-300 group-hover:translate-x-0.5 font-bold'>→</span>
+                </span>
               )}
             </div>
           </CardWrapper>

@@ -6,6 +6,7 @@ const EventDescription = () => {
   // Helper function to convert Google Drive links to direct image URLs
   const getImageUrl = (url) => {
     if (!url) return url;
+    if (url.startsWith('/assets/')) return url;
     
     // Extract file ID from various Google Drive URL formats
     let fileId = null;
@@ -17,14 +18,16 @@ const EventDescription = () => {
     }
     
     // Format 2: id={FILE_ID} or ?id={FILE_ID}
-    const driveMatch2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (driveMatch2) {
-      fileId = driveMatch2[1];
+    if (!fileId) {
+      const driveMatch2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch2) {
+        fileId = driveMatch2[1];
+      }
     }
     
-    // If we found a Google Drive file ID, use the thumbnail endpoint
+    // Direct CDN endpoint (works reliably without 429 redirects)
     if (fileId) {
-      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      return `https://lh3.googleusercontent.com/d/${fileId}=w1000`;
     }
     
     return url;
@@ -65,6 +68,7 @@ const EventDescription = () => {
               {event.imgSrc && (
                 <img
                   src={getImageUrl(event.imgSrc)}
+                  referrerPolicy="no-referrer"
                   className="w-full max-w-sm rounded-xl border-2 border-gray-700/50 shadow-lg"
                   alt={event.title}
                 />

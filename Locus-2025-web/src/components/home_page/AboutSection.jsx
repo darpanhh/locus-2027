@@ -25,7 +25,7 @@ export default function AboutSection() {
             <p className="text-white text-base sm:text-md lg:text-lg leading-relaxed max-w-4xl mx-auto">
               LOCUS is a non-profit organization led by undergraduate students of Electrical, Electronics, and Computer Engineering departments 
               from IOE, Pulchowk Campus. Since its inception in 2003, LOCUS has been providing a platform for young innovators from schools and 
-              colleges all over Nepal to showcase their skills and knowledge. LOCUS 2026 marks the 22nd edition of the National Level Technological 
+              colleges all over Nepal to showcase their skills and knowledge. LOCUS 2027 marks the 23rd edition of the National Level Technological 
               Exhibition. All its activities are guided by a single compass: fostering collaboration, promoting individual development and facilitating 
               innovation.
             </p>
