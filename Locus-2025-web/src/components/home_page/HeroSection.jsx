@@ -11,7 +11,7 @@ function EventDateCard({ day, nepaliMonth, englishDate, index }) {
           <div className='text-xs sm:text-sm font-medium uppercase tracking-wider text-fuchsia-300'>{nepaliMonth}</div>
           <div className='text-3xl sm:text-4xl md:text-5xl font-bold text-white'>{day}</div>
           <div className='hidden min-[400px]:block text-xs sm:text-sm font-medium text-gray-400'>{englishDate}</div>
-          <div className='text-[10px] sm:text-xs font-medium uppercase tracking-wide text-gray-500'>Day {parseInt(day) - 15}</div>
+          <div className='text-[10px] sm:text-xs font-medium uppercase tracking-wide text-gray-500'>Day {parseInt(day) - 21}</div>
         </div>
       </div>
     </div>
@@ -35,9 +35,9 @@ export default function HeroSection() {
   }, []);
 
   const eventDates = [
-    { day: "16", nepaliMonth: "MAGH", englishDate: "Jan 30, 2027" },
-    { day: "17", nepaliMonth: "MAGH", englishDate: "Jan 31, 2027" },
-    { day: "18", nepaliMonth: "MAGH", englishDate: "Feb 1, 2027" },
+    { day: "22", nepaliMonth: "MAGH", englishDate: "Feb 5, 2027" },
+    { day: "23", nepaliMonth: "MAGH", englishDate: "Feb 6, 2027" },
+    { day: "24", nepaliMonth: "MAGH", englishDate: "Feb 7, 2027" },
   ];
 
   return (
