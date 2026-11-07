@@ -229,30 +229,6 @@ const EventDescription = () => {
             </button>
           </Link>
         </div>
-
-        {/* Sponsors */}
-        {event.sponsoredby && event.sponsoredby.length > 0 && (
-          <div className="mt-12">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold">
-                <span className="text-[#e879f9]">Event</span>
-                <span className="text-white"> Sponsors</span>
-              </h2>
-              <div className="h-1 bg-gradient-to-r from-transparent via-[#e879f9] to-transparent w-1/2 mx-auto rounded-full mt-4" />
-            </div>
-            <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
-              {event.sponsoredby.map((img) => (
-                <div key={img.name} className="p-4 bg-gray-900/50 border-2 border-gray-700/50 rounded-lg hover:border-[#e879f9]/50 transition-all duration-300">
-                  <img
-                    src={getImageUrl(img.image)}
-                    className="w-32 sm:w-48 h-auto object-contain"
-                    alt={`${img.name} Sponsor`}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

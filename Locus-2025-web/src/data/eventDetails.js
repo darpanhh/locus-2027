@@ -20,7 +20,7 @@ export const eventsData = [
       button_text: "Register 850/-",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "Workshop",
     },
@@ -74,7 +74,7 @@ export const eventsData = [
       button_text: "Register Now/-",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Online",
       category: "Event",
     },
@@ -134,7 +134,7 @@ export const eventsData = [
       button_text: "Register Free",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "Event",
     },
@@ -188,7 +188,7 @@ export const eventsData = [
       button_text: "Closed",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "Hackathon",
     },
@@ -241,7 +241,7 @@ export const eventsData = [
       button_text: "Register Free/-",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Online",
       category: "Event",
     },
@@ -303,7 +303,7 @@ export const eventsData = [
       button_text: "Apply Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "Training Program",
     },
@@ -419,7 +419,7 @@ export const eventsData = [
       button_text: "Register Now/-",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Online",
       category: "Event",
     },
@@ -582,7 +582,7 @@ export const eventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -623,7 +623,7 @@ export const eventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -666,7 +666,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -708,7 +708,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "offline",
       category: "event",
     },
@@ -756,7 +756,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -800,7 +800,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -844,7 +844,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
@@ -888,7 +888,7 @@ export const mainEventsData = [
       button_text: "Register Now",
     },
     event_type: {
-      status: "Coming Soon",
+      status: "Closed",
       mode: "Offline",
       category: "event",
     },
