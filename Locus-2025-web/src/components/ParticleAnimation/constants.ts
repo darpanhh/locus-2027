@@ -2,11 +2,11 @@
 import { Colors } from './types';
 
 export const DEFAULT_COLORS: Colors = {
-  background: '#000000',
-  link: '#86198f',
-  text: '#ebe7c5',
-  particle: '#86198f',
-  particleStroke: '#86198f'
+  background: '#09030e',
+  link: '#8d2b8f',
+  text: '#df7fe6',
+  particle: '#9d36a3',
+  particleStroke: '#8d2b8f'
 };
 
 export const DEFAULT_PROPS = {
