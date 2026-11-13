@@ -76,7 +76,6 @@ const WireframeSphere = () => {
     // Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
-    controls.enableRotate = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
 
@@ -189,7 +188,7 @@ const WireframeSphere = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full flex items-center justify-center select-none cursor-default"
+      className="w-full h-full flex items-center justify-center select-none cursor-grab active:cursor-grabbing"
       style={{ touchAction: 'pan-y' }}
     />
   );
